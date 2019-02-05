@@ -18,9 +18,9 @@ public class Door : MonoBehaviour, IInteractible
     // Update is called once per frame
     void Update()
     {
-        if (open && transform.rotation.eulerAngles.y < 80)
+        if (open && transform.rotation.eulerAngles.y > -90)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 80, 0), maxDegreesDelta: 5);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, -90, 0), maxDegreesDelta: 5);
         } else if (!open && transform.rotation.eulerAngles.y > 0)
         {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 0), maxDegreesDelta: 5);

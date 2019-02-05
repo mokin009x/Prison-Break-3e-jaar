@@ -6,9 +6,42 @@
     <e p="C:\Users\mokin\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_Prison Break 3e jaar.-1330407649.00" t="ExcludeRecursive" />
     <e p="D:\Unity projects\Prison Break 3e jaar" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="ProCore" t="Include">
+          <e p="ProGrids" t="Include">
+            <e p="About" t="Include">
+              <e p="changelog.txt" t="Include" />
+              <e p="Editor" t="Include">
+                <e p="pg_AboutWindow.cs" t="Include" />
+              </e>
+              <e p="pc_AboutEntry_ProGrids.txt" t="Include" />
+            </e>
+            <e p="Classes" t="Include">
+              <e p="pg_Constant.cs" t="Include" />
+              <e p="pg_Enum.cs" t="Include" />
+              <e p="pg_IconUtility.cs" t="Include" />
+              <e p="pg_IgnoreSnapAttribute.cs" t="Include" />
+              <e p="pg_SceneMeshRender.cs" t="Include" />
+              <e p="pg_Util.cs" t="Include" />
+            </e>
+            <e p="Editor" t="Include">
+              <e p="pg_Editor.cs" t="Include" />
+              <e p="pg_GridRenderer.cs" t="Include" />
+              <e p="pg_ParameterWindow.cs" t="Include" />
+              <e p="pg_Preferences.cs" t="Include" />
+              <e p="pg_ToggleContent.cs" t="Include" />
+            </e>
+            <e p="MonoBehaviour" t="Include">
+              <e p="pg_IgnoreSnap.cs" t="Include" />
+            </e>
+            <e p="Shader" t="Include">
+              <e p="pg_GridShader.shader" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="SampleScenes" t="Include">
           <e p="Menu" t="Include">
             <e p="Scripts" t="Include">
@@ -29,17 +62,19 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="Acces.cs" t="Include" />
-          <e p="AccessItem.cs" t="Include" />
-          <e p="Bonus.cs" t="Include" />
-          <e p="BonusItem.cs" t="Include" />
-          <e p="Door.cs" t="Include" />
-          <e p="IInteractible.cs" t="Include" />
-          <e p="Inventory.cs" t="Include" />
-          <e p="Item.cs" t="Include" />
-          <e p="Pickup.cs" t="Include" />
-          <e p="PlayerController.cs" t="Include" />
-          <e p="Tests.cs" t="Include" />
+          <e p="Scripts" t="Include">
+            <e p="Acces.cs" t="Include" />
+            <e p="AccessItem.cs" t="Include" />
+            <e p="Bonus.cs" t="Include" />
+            <e p="BonusItem.cs" t="Include" />
+            <e p="Door.cs" t="Include" />
+            <e p="IInteractible.cs" t="Include" />
+            <e p="Inventory.cs" t="Include" />
+            <e p="Item.cs" t="Include" />
+            <e p="Pickup.cs" t="Include" />
+            <e p="PlayerController.cs" t="Include" />
+            <e p="Tests.cs" t="Include" />
+          </e>
         </e>
         <e p="Standard Assets" t="Include">
           <e p="2D" t="Include">
