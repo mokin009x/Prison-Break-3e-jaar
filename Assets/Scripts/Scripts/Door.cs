@@ -7,12 +7,13 @@ public class Door : MonoBehaviour, IInteractible
 {
     public int id;
     public bool open = false;
+    public Quaternion doorStartAngle;
     
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        doorStartAngle = transform.rotation;
     }
 
     // Update is called once per frame
@@ -23,7 +24,7 @@ public class Door : MonoBehaviour, IInteractible
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, -90, 0), maxDegreesDelta: 5);
         } else if (!open && transform.rotation.eulerAngles.y > 0)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 0), maxDegreesDelta: 5);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(doorStartAngle.eulerAngles), maxDegreesDelta: 5);
 
         }
     }

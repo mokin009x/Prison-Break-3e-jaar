@@ -6,6 +6,9 @@ public abstract class Pickup : MonoBehaviour, IInteractible
 {
     public string objectName;
     public float Weight;
+    public Sprite image;
+    private GameObject inventoryObj;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,19 @@ public abstract class Pickup : MonoBehaviour, IInteractible
         }
     }
 
+//----------------------------------------    
+    
+    public void SetinventoryObj(GameObject go)
+    {
+        inventoryObj = go;
+    }
+
+    public void removeInventoryObj()
+    {
+        Destroy(inventoryObj);
+        inventoryObj = null;
+    }
+//----------------------------------------
     protected abstract Item CreateItem();
 
 }
