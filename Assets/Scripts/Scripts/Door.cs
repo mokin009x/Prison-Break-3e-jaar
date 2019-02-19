@@ -43,3 +43,4 @@ public class Door : MonoBehaviour, IInteractible
         Open();
     }
 }
+    

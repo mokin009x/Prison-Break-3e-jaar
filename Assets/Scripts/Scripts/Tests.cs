@@ -24,7 +24,7 @@ public class Tests : MonoBehaviour
         Debug.Log("Inventory");
         Inventory.instance.printToConsole();
         
-        Inventory.instance.RemoveItem(bonus);
+        Inventory.instance.removeItem(bonus);
         Debug.Log("INVENTORY(after removing)");
         Inventory.instance.printToConsole();
     }

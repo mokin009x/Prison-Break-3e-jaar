@@ -5,22 +5,15 @@ using UnityEngine;
 public abstract class Pickup : MonoBehaviour, IInteractible
 {
     public string objectName;
-    public float Weight;
+    public float weight;
     public Sprite image;
     private GameObject inventoryObj;
-    
-    // Start is called before the first frame update
+
     void Start()
     {
-        
+        IventoryUI.instance.RegisterPickUpItem(this);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void Action()
     {
         if (Inventory.instance.AddItem(CreateItem()))
@@ -29,9 +22,12 @@ public abstract class Pickup : MonoBehaviour, IInteractible
         }
     }
 
-//----------------------------------------    
-    
-    public void SetinventoryObj(GameObject go)
+    public bool isInInventory()
+    {
+        return inventoryObj != null;
+    }
+
+    public void setInventoryObj(GameObject go)
     {
         inventoryObj = go;
     }
@@ -41,7 +37,13 @@ public abstract class Pickup : MonoBehaviour, IInteractible
         Destroy(inventoryObj);
         inventoryObj = null;
     }
-//----------------------------------------
-    protected abstract Item CreateItem();
 
+    public void Respawn()
+    {
+        removeInventoryObj();
+        transform.position = Camera.main.transform.position + Camera.main.transform.forward;
+        gameObject.SetActive(true);
+    }
+
+     protected abstract Item CreateItem();
 }
