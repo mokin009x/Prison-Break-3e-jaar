@@ -7,7 +7,13 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class PlayerController : MonoBehaviour
 {
 
-    public float range = 10f;
+    public float range = 2f;
+
+   
+    private void Awake()
+    {
+        range = 4f;
+    }
 
     void Update()
     {
@@ -20,6 +26,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Inventory"))
         {
             SetInventoryVisible(!IventoryUI.instance.gameObject.activeSelf);
+            Cursor.visible = true;
         }
     }
 
@@ -27,13 +34,14 @@ public class PlayerController : MonoBehaviour
     {
         IventoryUI.instance.gameObject.SetActive(value);
         GetComponent<FirstPersonController>().enabled = !value;
-        Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;  
+        Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
     void Interact()
     {
         Ray r = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         RaycastHit hit;
+        Debug.DrawRay(r.origin,r.direction);
 
         int ignorePlayer =~ LayerMask.GetMask("Player");
         

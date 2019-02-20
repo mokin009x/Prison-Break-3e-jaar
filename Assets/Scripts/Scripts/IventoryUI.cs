@@ -9,6 +9,7 @@ public class IventoryUI : MonoBehaviour
     public static IventoryUI instance;
     
     public GameObject itemPrefab;
+    public Transform parent;
     private Dictionary<string, Pickup> items;
 
     public void Awake()
@@ -44,7 +45,7 @@ public class IventoryUI : MonoBehaviour
        
         if (items.ContainsKey(i.name) && !items[i.name].isInInventory())
         {
-            GameObject go = Instantiate(itemPrefab, transform);
+            GameObject go = Instantiate(itemPrefab, parent, false);
             go.GetComponent<Image>().sprite = items[i.name].image;
             go.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = i.name;
             items[i.name].setInventoryObj(go);
