@@ -55,9 +55,11 @@ public class Inventory : MonoBehaviour
     {
         foreach (Item i in items)
         {
+            Debug.Log("checking items" + name);
             if (i.name == name)
             {
                 removeItem(i);
+                Debug.Log("removed" + i.name);
                 break;
             }
         }

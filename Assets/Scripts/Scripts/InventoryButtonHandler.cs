@@ -15,7 +15,7 @@ public class InventoryButtonHandler : MonoBehaviour
     
     public void HandleClick()
     {
-        Debug.Log("Removing " + transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+        //Debug.Log("Removing " + transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
         Inventory.instance.removeByName(transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
         player.SetInventoryVisible(false);
     }

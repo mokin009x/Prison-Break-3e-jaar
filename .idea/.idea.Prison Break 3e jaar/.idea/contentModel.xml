@@ -75,6 +75,12 @@
             <e p="Bonus.cs" t="Include" />
             <e p="BonusItem.cs" t="Include" />
             <e p="Door.cs" t="Include" />
+            <e p="genarating scripts" t="Include">
+              <e p="HeightPass.cs" t="Include" />
+              <e p="MathUtils.cs" t="Include" />
+              <e p="ProceduralBehaviour.cs" t="Include" />
+              <e p="ProceduralTerrain.cs" t="Include" />
+            </e>
             <e p="IInteractible.cs" t="Include" />
             <e p="Inventory.cs" t="Include" />
             <e p="InventoryButtonHandler.cs" t="Include" />
@@ -83,6 +89,7 @@
             <e p="Pickup.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
             <e p="Tests.cs" t="Include" />
+            <e p="Web.cs" t="Include" />
           </e>
         </e>
         <e p="Standard Assets" t="Include">
