@@ -410,6 +410,7 @@ GameObject:
   - component: {fileID: 2259345343617464221}
   - component: {fileID: 6784014855592041442}
   - component: {fileID: 3123879822970078860}
+  - component: {fileID: 7245741405035107816}
   m_Layer: 0
   m_Name: Jaildoor
   m_TagString: Untagged
@@ -424,7 +425,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2259345343617464192}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.7, y: 0.1, z: -4.7000003}
   m_LocalScale: {x: -0.1, y: -0.1, z: -0.1}
   m_Children:
@@ -739,6 +740,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 15.527523, y: 24.745361, z: 2.0000029}
   m_Center: {x: 6.7637596, y: -10.006882, z: -0.0000033527613}
+--- !u!208 &7245741405035107816
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2259345343617464192}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 8.615, y: 16.5, z: 1}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 6.64, y: -9.72, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2259345343652189723
 GameObject:
   m_ObjectHideFlags: 0

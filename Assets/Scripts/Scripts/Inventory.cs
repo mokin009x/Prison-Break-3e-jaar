@@ -7,7 +7,6 @@ using UnityEngine.Serialization;
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
-
     private List<Item> items;
     public float maximumWeight = 10.0f;
     public float totalWeight;

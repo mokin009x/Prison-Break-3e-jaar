@@ -42,14 +42,15 @@ public class ProceduralBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        /*if (Input.GetButtonDown("Fire1"))
         {
             Generate(); 
-        } 
+        } */
     }
 
     public void Generate()
     {
+        
         setSeed(seed);
         Debug.Log("We can generate " + int.MaxValue + " versions of this procedure");
         Debug.Log("Generating version: " + seed);
@@ -72,5 +73,6 @@ public class ProceduralBehaviour : MonoBehaviour
             seed = s;
         }
         perlinSeed = Random.Range(0.0f, 1000000f);
+        seed = Mathf.RoundToInt(Random.Range(0.0f, 1000000f));
     }
 }

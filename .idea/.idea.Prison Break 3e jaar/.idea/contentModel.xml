@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\mokin\.Rider2018.3\config\scratches" t="IncludeRecursive" />
-    <e p="C:\Users\mokin\.Rider2018.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\mokin\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_Prison Break 3e jaar.-1330407649.00" t="ExcludeRecursive" />
+    <e p="C:\Users\mokin\.Rider2019.1\config\scratches" t="IncludeRecursive" />
+    <e p="C:\Users\mokin\.Rider2019.1\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\mokin\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_Prison Break 3e jaar.-1330407649.00" t="ExcludeRecursive" />
     <e p="D:\Unity projects\Prison Break 3e jaar" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
@@ -74,6 +74,7 @@
             <e p="AccessItem.cs" t="Include" />
             <e p="Bonus.cs" t="Include" />
             <e p="BonusItem.cs" t="Include" />
+            <e p="Computer.cs" t="Include" />
             <e p="Door.cs" t="Include" />
             <e p="genarating scripts" t="Include">
               <e p="HeightPass.cs" t="Include" />
@@ -81,6 +82,7 @@
               <e p="ProceduralBehaviour.cs" t="Include" />
               <e p="ProceduralTerrain.cs" t="Include" />
             </e>
+            <e p="Guard.cs" t="Include" />
             <e p="IInteractible.cs" t="Include" />
             <e p="Inventory.cs" t="Include" />
             <e p="InventoryButtonHandler.cs" t="Include" />

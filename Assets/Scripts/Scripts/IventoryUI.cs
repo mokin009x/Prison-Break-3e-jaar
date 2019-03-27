@@ -11,6 +11,9 @@ public class IventoryUI : MonoBehaviour
     public GameObject itemPrefab;
     public Transform parent;
     private Dictionary<string, Pickup> items;
+    public GameObject pcScreen;
+    public GameObject inventoryScreen;
+    public InputField pcInputField;
 
     public void Awake()
     {
@@ -29,7 +32,30 @@ public class IventoryUI : MonoBehaviour
 
     void Start()
     {
-        gameObject.SetActive(false);
+        pcScreen = gameObject.transform.GetChild(1).gameObject;
+        inventoryScreen = gameObject.transform.GetChild(0).gameObject;
+        pcInputField = pcScreen.transform.GetChild(0).gameObject.GetComponent<InputField>();
+
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            gameObject.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+       
+    }
+
+    public bool CompareCode(string code)
+    {
+        if (pcInputField.text == code)
+        {
+            //open door
+            pcInputField.gameObject.SetActive(false);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void RegisterPickUpItem(Pickup i)

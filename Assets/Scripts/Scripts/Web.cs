@@ -5,10 +5,11 @@ using UnityEngine.Networking;
 
 public class Web : MonoBehaviour
 {
-  
-    
-
+    public static Web instance;
     public string receivedText;
+    public string pcCode;
+
+
     IEnumerator GetRequest(string uri)
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
@@ -24,19 +25,32 @@ public class Web : MonoBehaviour
             {
                 receivedText = webRequest.downloadHandler.text;
                 Debug.Log( ":\nReceived: " + receivedText);
-                
-                
+
+                pcCode = receivedText;
             }
         }
     }
     
-    
+    public void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(this);
+        }
+        
+    }
     
     // Start is called before the first frame update
     void Start()
-    {
-        StartCoroutine(GetRequest("https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/GoddessWithBIade%20?api_key=RGAPI-d6c10dc6-ce5c-4b79-9e3d-9089edb8cf22"));
+    { 
+        StartCoroutine(GetRequest("https://euw1.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/cqOXbSOi9pHlwamaVmMyGW8IOc-iAFeNhtuBGkffl__2g-M?api_key=RGAPI-ad690d44-2f9e-4b9f-b653-053f1fd427e9"));
 
+       
 
 
     }
@@ -47,7 +61,11 @@ public class Web : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.Log(pcCode);
+        }
 
     }
 }
