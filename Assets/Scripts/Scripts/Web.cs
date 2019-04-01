@@ -1,18 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 using UnityEngine.Networking;
+using SimpleJSON;
+using UnityEditor.Experimental.GraphView;
+
 
 public class Web : MonoBehaviour
 {
     public static Web instance;
     public string receivedText;
     public string pcCode;
+    public string test;
+    string yayayay;
 
+    
+    
+    //api stuff
+    public string apiKey;
+    public JSONNode getByName;
+    public string defaultName;
+    public string apiByNameReturnString;
+    
+    //api url templates
+    public string baseUrl;
+    public string apiNameUrlTemp;
+    
 
-    IEnumerator GetRequest(string uri)
+    IEnumerator GetRequest(string _baseUrl, string _urlTemp, string _name, string _apiKey)
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+        
+        string combinedUrl = _baseUrl + _urlTemp + _name + _apiKey;
+        Debug.Log("Combined url =" + combinedUrl);
+
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(combinedUrl))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -23,16 +45,34 @@ public class Web : MonoBehaviour
             }
             else
             {
+                
                 receivedText = webRequest.downloadHandler.text;
+                
+                //getByName = JSON.Parse(combinedUrl);
+                
+                var test = getByName["summonerLevel"].Value; ////////////////////////////////////////////////////////////////////////// here
+                
+                
                 Debug.Log( ":\nReceived: " + receivedText);
+                yield return receivedText;
 
-                pcCode = receivedText;
+
+                
+                
             }
+
+
         }
+        
     }
     
     public void Awake()
     {
+        baseUrl = "https://euw1.api.riotgames.com/lol/";
+        apiNameUrlTemp = "summoner/v4/summoners/by-name/";
+        apiKey = "?api_key=RGAPI-d27c7601-65c6-4bcf-b7f8-8d66a8743049";
+        defaultName = "GoddessWithBIade";
+        
         if (instance == null)
         {
             instance = this;
@@ -47,13 +87,47 @@ public class Web : MonoBehaviour
     
     // Start is called before the first frame update
     void Start()
-    { 
-        StartCoroutine(GetRequest("https://euw1.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/cqOXbSOi9pHlwamaVmMyGW8IOc-iAFeNhtuBGkffl__2g-M?api_key=RGAPI-ad690d44-2f9e-4b9f-b653-053f1fd427e9"));
+    {
+        StartCoroutine(GetRequest(baseUrl, apiNameUrlTemp, defaultName, apiKey));
 
-       
 
 
     }
+    
+    
+    IEnumerator GetRequestByName(string _baseUrl, string _urlTemp, string _name, string _apiKey)
+    {
+        string combinedUrl = _baseUrl +_urlTemp + _name + _apiKey;
+        
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(combinedUrl))
+        {
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+
+            if (webRequest.isNetworkError)
+            {
+                Debug.Log(": Error: " + webRequest.error);
+            }
+            else
+            {
+                getByName = JSON.Parse(combinedUrl);
+                
+                var test = getByName["id"].Value;
+                
+                
+                receivedText = webRequest.downloadHandler.text;
+                Debug.Log( ":\nReceived: " + receivedText);
+
+                apiByNameReturnString = test;
+                
+            }
+
+
+        }
+
+    }
+
+    
 
 
 
@@ -64,7 +138,12 @@ public class Web : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log(pcCode);
+            //GetRequestByName(baseUrl, apiNameUrlTemp, defaultName, apiKey);
+           // GetRequest(baseUrl, defaultName,apiKey);
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Debug.Log(yayayay);
         }
 
     }

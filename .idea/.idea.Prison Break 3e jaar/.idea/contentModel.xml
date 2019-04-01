@@ -90,6 +90,7 @@
             <e p="IventoryUI.cs" t="Include" />
             <e p="Pickup.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
+            <e p="SimpleJson.cs" t="Include" />
             <e p="Tests.cs" t="Include" />
             <e p="Web.cs" t="Include" />
           </e>
@@ -359,6 +360,9 @@
           <e p="Sprites" t="Include">
             <e p="EmojiOne Attribution.txt" t="Include" />
           </e>
+        </e>
+        <e p="Wispy Sky" t="Include">
+          <e p="Readme.txt" t="Include" />
         </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />
