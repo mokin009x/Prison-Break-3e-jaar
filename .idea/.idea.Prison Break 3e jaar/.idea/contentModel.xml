@@ -72,6 +72,7 @@
           <e p="Scripts" t="Include">
             <e p="Acces.cs" t="Include" />
             <e p="AccessItem.cs" t="Include" />
+            <e p="Boat.cs" t="Include" />
             <e p="Bonus.cs" t="Include" />
             <e p="BonusItem.cs" t="Include" />
             <e p="Computer.cs" t="Include" />

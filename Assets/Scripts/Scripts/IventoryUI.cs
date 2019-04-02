@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,7 @@ public class IventoryUI : MonoBehaviour
     public GameObject inventoryScreen;
     public InputField pcInputField;
     public GameObject pickupIcon;
+    public GameObject nameChanger;
 
     public void Awake()
     {
@@ -33,6 +35,8 @@ public class IventoryUI : MonoBehaviour
 
     void Start()
     {
+
+        nameChanger = gameObject.transform.GetChild(3).gameObject;
         pickupIcon = gameObject.transform.GetChild(2).gameObject;
         
         inventoryScreen = gameObject.transform.GetChild(0).gameObject;
@@ -45,7 +49,19 @@ public class IventoryUI : MonoBehaviour
             gameObject.transform.GetChild(i).gameObject.SetActive(false);
         }
 
-       
+        Web.instance.changeNameInput = nameChanger.transform.GetChild(0).gameObject.GetComponent<InputField>();
+
+        DisableUi();
+
+    }
+
+    public void DisableUi()
+    {
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            gameObject.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
     }
 
     public bool CompareCode(string code)

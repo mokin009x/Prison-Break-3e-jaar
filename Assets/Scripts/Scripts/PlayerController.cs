@@ -9,12 +9,17 @@ public class PlayerController : MonoBehaviour
 
     public float range = 2f;
     public Door finalDoor;
+    public bool inMenu;
+    
     private void Awake()
     {
         range = 4f;
     }
 
-    
+    private void Start()
+    {
+        inMenu = false;
+    }
 
     void Update()
     {
@@ -48,14 +53,22 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetButtonDown("Action"))
         {
-            Interact();
-            Debug.Log("pressed action");
+            if (!inMenu)
+            {
+                Interact();
+                Debug.Log("pressed action");
+            }
+            
 
         }
         
         if (Input.GetButtonDown("Inventory"))
         {
-            SetInventoryVisible(!IventoryUI.instance.transform.GetChild(0).gameObject.activeSelf);
+            if (!inMenu)
+            {
+                SetInventoryVisible(!IventoryUI.instance.transform.GetChild(0).gameObject.activeSelf);
+
+            }
             
             Cursor.visible = true;
         }
@@ -76,6 +89,7 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             GetComponent<FirstPersonController>().enabled = true;
             finalDoor.open = true;
+            inMenu = false;
 
 
         }
@@ -84,6 +98,16 @@ public class PlayerController : MonoBehaviour
             Debug.Log("wrong code");
         }
     }
+
+    public void CloseUi()
+    {
+        IventoryUI.instance.DisableUi();
+        inMenu = false;
+
+        GetComponent<FirstPersonController>().enabled = true;
+
+    }
+
 
     public void SetInventoryVisible(bool value)
     {
@@ -106,10 +130,20 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("Hit " + hit.collider.gameObject.name);
             if (hit.collider.gameObject.CompareTag("Pc"))
             {
+                inMenu = true;
                 GetComponent<FirstPersonController>().enabled = false;
                 IventoryUI.instance.pcScreen.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+            }
+
+            if (hit.collider.gameObject.CompareTag("Name Changer"))
+            {
+                inMenu = true;
+                GetComponent<FirstPersonController>().enabled = false;
+                IventoryUI.instance.nameChanger.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true; 
             }
 
             if (hit.collider.gameObject.CompareTag("Item"))

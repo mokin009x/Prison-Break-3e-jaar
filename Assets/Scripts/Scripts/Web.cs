@@ -4,16 +4,20 @@ using System.Net;
 using UnityEngine;
 using UnityEngine.Networking;
 using SimpleJSON;
+using TMPro;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine.AI;
+using UnityEngine.UI;
 
 
 public class Web : MonoBehaviour
 {
     public static Web instance;
     public string receivedText;
-    public string pcCode;
-    public string test;
-    string yayayay;
+    public string currentCode;
+    public GameObject changeNamePc;
+    public InputField changeNameInput;
+    
 
     
     
@@ -28,48 +32,13 @@ public class Web : MonoBehaviour
     public string apiNameUrlTemp;
     
 
-    IEnumerator GetRequest(string _baseUrl, string _urlTemp, string _name, string _apiKey)
-    {
-        
-        string combinedUrl = _baseUrl + _urlTemp + _name + _apiKey;
-        Debug.Log("Combined url =" + combinedUrl);
-
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(combinedUrl))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            if (webRequest.isNetworkError)
-            {
-                Debug.Log(": Error: " + webRequest.error);
-            }
-            else
-            {
-                
-                receivedText = webRequest.downloadHandler.text;
-                
-                
-                var test = getByName["summonerLevel"].Value; ////////////////////////////////////////////////////////////////////////// here
-                
-                
-                Debug.Log( ":\nReceived: " + receivedText);
-                yield return receivedText;
-
-
-                
-                
-            }
-
-
-        }
-        
-    }
+    
     
     public void Awake()
     {
         baseUrl = "https://euw1.api.riotgames.com";
         apiNameUrlTemp = "/lol/summoner/v4/summoners/by-name/";
-        apiKey = "?api_key=RGAPI-4502af58-3eb4-4519-a21b-09c201a82a54";
+        apiKey = "?api_key=RGAPI-6812228c-1724-4411-81a1-bf3a8b2ce869";
         defaultName = "GoddessWithBIade";
         if (instance == null)
         {
@@ -87,12 +56,20 @@ public class Web : MonoBehaviour
     void Start()
     {
         StartCoroutine(GetRequestByName(baseUrl, apiNameUrlTemp, defaultName, apiKey));
+    }
 
-
+    public void ApiChangeCodeByName()
+    {
+        if (changeNameInput.text != "")
+        {
+            string newName = changeNameInput.text;
+            StartCoroutine(GetRequestByName(baseUrl, apiNameUrlTemp, newName , apiKey));
+        }
+       
 
     }
-    
-    
+
+
     IEnumerator GetRequestByName(string _baseUrl, string _urlTemp, string _name, string _apiKey)
     {
         string combinedUrl = _baseUrl +_urlTemp + _name + _apiKey;
@@ -129,6 +106,10 @@ public class Web : MonoBehaviour
 
         }
 
+        currentCode = "Current name = " + _name + "\n" + "Current code = " + apiByNameReturnString + "\n" + "Press E on this pc to change name";
+        changeNamePc.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text = currentCode;
+
+
     }
 
     
@@ -140,11 +121,7 @@ public class Web : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            //GetRequestByName(baseUrl, apiNameUrlTemp, defaultName, apiKey);
-           // GetRequest(baseUrl, defaultName,apiKey);
-        }
+       
         if (Input.GetKeyDown(KeyCode.G))
         {
             Debug.Log(apiByNameReturnString);
