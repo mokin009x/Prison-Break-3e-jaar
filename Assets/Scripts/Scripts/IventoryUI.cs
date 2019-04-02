@@ -14,6 +14,7 @@ public class IventoryUI : MonoBehaviour
     public GameObject pcScreen;
     public GameObject inventoryScreen;
     public InputField pcInputField;
+    public GameObject pickupIcon;
 
     public void Awake()
     {
@@ -32,8 +33,11 @@ public class IventoryUI : MonoBehaviour
 
     void Start()
     {
-        pcScreen = gameObject.transform.GetChild(1).gameObject;
+        pickupIcon = gameObject.transform.GetChild(2).gameObject;
+        
         inventoryScreen = gameObject.transform.GetChild(0).gameObject;
+       
+        pcScreen = gameObject.transform.GetChild(1).gameObject;
         pcInputField = pcScreen.transform.GetChild(0).gameObject.GetComponent<InputField>();
 
         for (int i = 0; i < gameObject.transform.childCount; i++)

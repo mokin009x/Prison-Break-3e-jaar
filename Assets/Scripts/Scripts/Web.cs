@@ -48,7 +48,6 @@ public class Web : MonoBehaviour
                 
                 receivedText = webRequest.downloadHandler.text;
                 
-                //getByName = JSON.Parse(combinedUrl);
                 
                 var test = getByName["summonerLevel"].Value; ////////////////////////////////////////////////////////////////////////// here
                 
@@ -68,11 +67,10 @@ public class Web : MonoBehaviour
     
     public void Awake()
     {
-        baseUrl = "https://euw1.api.riotgames.com/lol/";
-        apiNameUrlTemp = "summoner/v4/summoners/by-name/";
-        apiKey = "?api_key=RGAPI-d27c7601-65c6-4bcf-b7f8-8d66a8743049";
+        baseUrl = "https://euw1.api.riotgames.com";
+        apiNameUrlTemp = "/lol/summoner/v4/summoners/by-name/";
+        apiKey = "?api_key=RGAPI-4502af58-3eb4-4519-a21b-09c201a82a54";
         defaultName = "GoddessWithBIade";
-        
         if (instance == null)
         {
             instance = this;
@@ -88,7 +86,7 @@ public class Web : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(GetRequest(baseUrl, apiNameUrlTemp, defaultName, apiKey));
+        StartCoroutine(GetRequestByName(baseUrl, apiNameUrlTemp, defaultName, apiKey));
 
 
 
@@ -110,15 +108,21 @@ public class Web : MonoBehaviour
             }
             else
             {
-                getByName = JSON.Parse(combinedUrl);
                 
-                var test = getByName["id"].Value;
+                
+                
+                
                 
                 
                 receivedText = webRequest.downloadHandler.text;
-                Debug.Log( ":\nReceived: " + receivedText);
 
-                apiByNameReturnString = test;
+                Debug.Log( ":\nReceived: " + receivedText);
+                
+                getByName = JSON.Parse(receivedText);
+                
+                string recievedValue = getByName["summonerLevel"].Value;
+                
+                apiByNameReturnString = recievedValue.ToString();
                 
             }
 
@@ -143,7 +147,7 @@ public class Web : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
-            Debug.Log(yayayay);
+            Debug.Log(apiByNameReturnString);
         }
 
     }

@@ -18,6 +18,34 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Ray r = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        RaycastHit hit;
+        Debug.DrawRay(r.origin,r.direction);
+
+
+       
+        if (Physics.Raycast(r, out hit, range))
+        {    
+            
+            if (hit.collider.gameObject.CompareTag("Item"))
+            {
+                IventoryUI.instance.pickupIcon.SetActive(true);
+            }
+            
+            
+        }
+        else if (Physics.Raycast(r, out hit, Mathf.Infinity))
+        {
+            
+            
+                if (!hit.collider.gameObject.CompareTag("Item"))
+                {
+                    IventoryUI.instance.pickupIcon.SetActive(false);
+
+                }
+
+        }
+        
         if (Input.GetButtonDown("Action"))
         {
             Interact();
@@ -38,7 +66,7 @@ public class PlayerController : MonoBehaviour
     public void CheckInput()
     {
         string currentCode;
-        currentCode = Web.instance.pcCode;
+        currentCode = Web.instance.apiByNameReturnString;
         //IventoryUI.instance.pcScreen.SetActive(false);
         if (IventoryUI.instance.CompareCode(currentCode))
         {
@@ -75,7 +103,7 @@ public class PlayerController : MonoBehaviour
        
         if (Physics.Raycast(r, out hit, range, ignorePlayer))
         {    
-            Debug.Log("Hit " + hit.collider.gameObject.name);
+            //Debug.Log("Hit " + hit.collider.gameObject.name);
             if (hit.collider.gameObject.CompareTag("Pc"))
             {
                 GetComponent<FirstPersonController>().enabled = false;
@@ -83,6 +111,17 @@ public class PlayerController : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
+
+            if (hit.collider.gameObject.CompareTag("Item"))
+            {
+                IventoryUI.instance.pickupIcon.SetActive(true);
+            }
+            /*else if (transform)
+            {
+                IventoryUI.instance.pickupIcon.SetActive(false);
+
+            }*/
+            
             IInteractible i = hit.collider.gameObject.GetComponent<IInteractible>();
             if (i != null)
             {
