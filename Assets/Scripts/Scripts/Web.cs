@@ -1,39 +1,30 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Net;
-using UnityEngine;
-using UnityEngine.Networking;
 using SimpleJSON;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.AI;
+using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
-
 
 public class Web : MonoBehaviour
 {
     public static Web instance;
-    public string receivedText;
-    public string currentCode;
-    public GameObject changeNamePc;
-    public InputField changeNameInput;
-    
+    public string apiByNameReturnString;
 
-    
-    
+
     //api stuff
     public string apiKey;
-    public JSONNode getByName;
-    public string defaultName;
-    public string apiByNameReturnString;
-    
+    public string apiNameUrlTemp;
+
     //api url templates
     public string baseUrl;
-    public string apiNameUrlTemp;
-    
+    public InputField changeNameInput;
+    public GameObject changeNamePc;
+    public string currentCode;
+    public string defaultName;
+    public JSONNode getByName;
+    public string receivedText;
 
-    
-    
+
     public void Awake()
     {
         baseUrl = "https://euw1.api.riotgames.com";
@@ -49,11 +40,10 @@ public class Web : MonoBehaviour
         {
             Destroy(this);
         }
-        
     }
-    
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         StartCoroutine(GetRequestByName(baseUrl, apiNameUrlTemp, defaultName, apiKey));
     }
@@ -62,19 +52,17 @@ public class Web : MonoBehaviour
     {
         if (changeNameInput.text != "")
         {
-            string newName = changeNameInput.text;
-            StartCoroutine(GetRequestByName(baseUrl, apiNameUrlTemp, newName , apiKey));
+            var newName = changeNameInput.text;
+            StartCoroutine(GetRequestByName(baseUrl, apiNameUrlTemp, newName, apiKey));
         }
-       
-
     }
 
 
-    IEnumerator GetRequestByName(string _baseUrl, string _urlTemp, string _name, string _apiKey)
+    private IEnumerator GetRequestByName(string _baseUrl, string _urlTemp, string _name, string _apiKey)
     {
-        string combinedUrl = _baseUrl +_urlTemp + _name + _apiKey;
-        
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(combinedUrl))
+        var combinedUrl = _baseUrl + _urlTemp + _name + _apiKey;
+
+        using (var webRequest = UnityWebRequest.Get(combinedUrl))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -85,47 +73,27 @@ public class Web : MonoBehaviour
             }
             else
             {
-                
-                
-                
-                
-                
-                
                 receivedText = webRequest.downloadHandler.text;
 
-                Debug.Log( ":\nReceived: " + receivedText);
-                
+                Debug.Log(":\nReceived: " + receivedText);
+
                 getByName = JSON.Parse(receivedText);
-                
-                string recievedValue = getByName["summonerLevel"].Value;
-                
-                apiByNameReturnString = recievedValue.ToString();
-                
+
+                var recievedValue = getByName["summonerLevel"].Value;
+
+                apiByNameReturnString = recievedValue;
             }
-
-
         }
 
-        currentCode = "Current name = " + _name + "\n" + "Current code = " + apiByNameReturnString + "\n" + "Press E on this pc to change name";
+        currentCode = "Current name = " + _name + "\n" + "Current code = " + apiByNameReturnString + "\n" +
+                      "Press E on this pc to change name";
         changeNamePc.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text = currentCode;
-
-
     }
-
-    
-
-
 
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-       
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Debug.Log(apiByNameReturnString);
-        }
-
+        if (Input.GetKeyDown(KeyCode.G)) Debug.Log(apiByNameReturnString);
     }
 }

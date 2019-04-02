@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerController : MonoBehaviour
 {
-
-    public float range = 2f;
     public Door finalDoor;
     public bool inMenu;
-    
+
+    public float range = 2f;
+
     private void Awake()
     {
         range = 4f;
@@ -21,59 +18,35 @@ public class PlayerController : MonoBehaviour
         inMenu = false;
     }
 
-    void Update()
+    private void Update()
     {
-        Ray r = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        var r = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         RaycastHit hit;
-        Debug.DrawRay(r.origin,r.direction);
+        Debug.DrawRay(r.origin, r.direction);
 
 
-       
         if (Physics.Raycast(r, out hit, range))
-        {    
-            
-            if (hit.collider.gameObject.CompareTag("Item"))
-            {
-                IventoryUI.instance.pickupIcon.SetActive(true);
-            }
-            
-            
+        {
+            if (hit.collider.gameObject.CompareTag("Item")) IventoryUI.instance.pickupIcon.SetActive(true);
         }
         else if (Physics.Raycast(r, out hit, Mathf.Infinity))
         {
-            
-            
-                if (!hit.collider.gameObject.CompareTag("Item"))
-                {
-                    IventoryUI.instance.pickupIcon.SetActive(false);
-
-                }
-
+            if (!hit.collider.gameObject.CompareTag("Item")) IventoryUI.instance.pickupIcon.SetActive(false);
         }
-        
+
         if (Input.GetButtonDown("Action"))
-        {
             if (!inMenu)
             {
                 Interact();
                 Debug.Log("pressed action");
             }
-            
 
-        }
-        
         if (Input.GetButtonDown("Inventory"))
         {
-            if (!inMenu)
-            {
-                SetInventoryVisible(!IventoryUI.instance.transform.GetChild(0).gameObject.activeSelf);
+            if (!inMenu) SetInventoryVisible(!IventoryUI.instance.transform.GetChild(0).gameObject.activeSelf);
 
-            }
-            
             Cursor.visible = true;
         }
-        
-      
     }
 
     public void CheckInput()
@@ -90,8 +63,6 @@ public class PlayerController : MonoBehaviour
             GetComponent<FirstPersonController>().enabled = true;
             finalDoor.open = true;
             inMenu = false;
-
-
         }
         else
         {
@@ -105,7 +76,6 @@ public class PlayerController : MonoBehaviour
         inMenu = false;
 
         GetComponent<FirstPersonController>().enabled = true;
-
     }
 
 
@@ -116,17 +86,17 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
-    void Interact()
+    private void Interact()
     {
-        Ray r = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        var r = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         RaycastHit hit;
-        Debug.DrawRay(r.origin,r.direction);
+        Debug.DrawRay(r.origin, r.direction);
 
-        int ignorePlayer =~ LayerMask.GetMask("Player");
+        var ignorePlayer = ~ LayerMask.GetMask("Player");
 
-       
+
         if (Physics.Raycast(r, out hit, range, ignorePlayer))
-        {    
+        {
             //Debug.Log("Hit " + hit.collider.gameObject.name);
             if (hit.collider.gameObject.CompareTag("Pc"))
             {
@@ -143,24 +113,18 @@ public class PlayerController : MonoBehaviour
                 GetComponent<FirstPersonController>().enabled = false;
                 IventoryUI.instance.nameChanger.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true; 
+                Cursor.visible = true;
             }
 
-            if (hit.collider.gameObject.CompareTag("Item"))
-            {
-                IventoryUI.instance.pickupIcon.SetActive(true);
-            }
+            if (hit.collider.gameObject.CompareTag("Item")) IventoryUI.instance.pickupIcon.SetActive(true);
             /*else if (transform)
             {
                 IventoryUI.instance.pickupIcon.SetActive(false);
 
             }*/
-            
-            IInteractible i = hit.collider.gameObject.GetComponent<IInteractible>();
-            if (i != null)
-            {
-                i.Action();
-            }
+
+            var i = hit.collider.gameObject.GetComponent<IInteractible>();
+            if (i != null) i.Action();
         }
     }
 }
